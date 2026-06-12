@@ -1,0 +1,59 @@
+experiment:
+  wandb: True
+  fintune: False
+  data_type: weak
+  project: weak_celldetr
+  name: for_test
+  seed: 42
+  output_dir: /public/home/zhangshikang/project/DATA/models/weak
+  checkpoint: None
+  device: cuda
+dataset:
+  __file__: config/data/weak.yaml
+  test:
+    __file__: config/data/pannuke.yaml
+    fold: fold1
+transforms:
+  normalize:
+    mean: [0.70478431, 0.57330757, 0.74134993]
+    std: [0.1786614, 0.22592805, 0.19027899]
+  augmentations:
+    - name: blur
+      p: 0.2
+      kernel_size: 9
+      sigma: [0.2, 1.0]
+    - name: hedjitter_
+model:
+  __file__: config/model/weak.yaml
+  backbone:
+    __file__: config/backbone/r50_4lvl.yaml
+optimizer:
+  epochs: 21
+  weight_decay: 0.0001
+  clip_max_norm: 0.1
+  start_saving_epoch: 0
+  save_per_epoch: 10
+  lr_backbone: 0.000001
+  lr: 0.00001
+  lr_drop: 10
+  lr_drop_factor: 0.1
+matcher:
+  __file__: config/base/matcher.yaml
+loss:
+  __file__: config/base/loss/weak_train.yaml
+loader:
+  train:
+    batch_size: 16
+    num_workers: 1
+    shuffle: True
+    drop_last: True
+  val:
+    batch_size: 16
+    num_workers: 1
+    shuffle: False
+    drop_last: True
+  test:
+    batch_size: 8
+    num_workers: 1
+    shuffle: False
+    drop_last: False

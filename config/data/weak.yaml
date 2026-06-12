@@ -1,0 +1,6 @@
+name: weak
+root: /public/home/zhangshikang/project/DATA/weak_data/split_train/train
+shuffle: True
+tissue: ['kidney','lung','prostate']
+# tissue: ['lung']
+train_pct: 0.9

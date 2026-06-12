@@ -1,0 +1,60 @@
+experiment:
+  wandb: True
+  fintune: True
+  data_type: semi
+  project: semi_detr
+  name: for_test2m
+  seed: 42
+  output_dir: /public/home/zhangshikang/project/DATA/models/semi_train
+  checkpoint: None
+  device: cuda
+dataset:
+  __file__: config/data/semi.yaml
+  test:
+    __file__: config/data/pannuke.yaml
+    fold: fold2
+transforms:
+  normalize:
+    mean: [0.70478431, 0.57330757, 0.74134993]
+    std: [0.1786614, 0.22592805, 0.19027899]
+  augmentations:
+    - name: blur
+      p: 0.2
+      kernel_size: 9
+      sigma: [0.2, 1.0]
+    - name: hedjitter_
+model:
+  __file__: config/model/semi.yaml
+  backbone:
+    __file__: config/backbone/r50_4lvl.yaml
+optimizer:
+  epochs: 50
+  weight_decay: 0.0001
+  clip_max_norm: 0.1
+  start_saving_epoch: 100
+  save_per_epoch: 100
+  lr_backbone: 0.00001
+  lr: 0.0001
+  num_warmup_steps: 600
+  # lr_drop: 30
+  # lr_drop_factor: 0.1
+matcher:
+  __file__: config/base/matcher.yaml
+loss:
+  __file__: config/base/loss/semi_train.yaml
+loader:
+  train:
+    batch_size: 16
+    num_workers: 1
+    shuffle: True
+    drop_last: True
+  val:
+    batch_size: 16
+    num_workers: 1
+    shuffle: False
+    drop_last: True
+  test:
+    batch_size: 8
+    num_workers: 1
+    shuffle: False
+    drop_last: False

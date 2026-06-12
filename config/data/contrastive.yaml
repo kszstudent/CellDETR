@@ -1,0 +1,6 @@
+name: contrastive
+root: /public/home/zhangshikang/project/DATA/weak_data/train
+shuffle: True
+tissue: ['kidney','lung','prostate']
+# tissue: ['lung']
+train_pct: 0.8

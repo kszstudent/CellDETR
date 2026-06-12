@@ -1,0 +1,36 @@
+name: decouple
+boxes_mode: 1 #  1:normal|2:noised|3:DINO strategy|4: contrastive learning
+training_type: parallel  # sequential | parallel | contrastive
+num_queries: 900
+device: cuda
+postprocess: label
+with_box_refine: True
+two_stage: False
+hidden_dim: 256
+num_feature_levels: 4
+aux_loss: True
+masks : False
+num_layer_feature_decoder: 3
+num_classes: 5
+nheads: 8
+restrict_attn: True
+dim_feedforward : 1024
+nheads: 8
+dropout: 0.1
+enc_layers: 6
+dec_layers: 3
+enc_n_points: 4
+dec_n_points: 4
+activation: relu
+position_embedding: 
+  name: sine
+transformer:
+  restrict_attn: True
+  dim_feedforward : 1024
+  nheads: 8
+  dropout: 0.1
+  enc_layers: 6
+  dec_layers: 3
+  enc_n_points: 4
+  dec_n_points: 4
+  activation: relu

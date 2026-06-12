@@ -1,0 +1,79 @@
+experiment:
+  wandb: True
+  fintune: True
+  freeze_shared: False
+  data_type: supervised
+  project: supervised_finetune
+  # name: clf_freeze_test(lr=0.0002,epochs=30)
+  name: clf(80%,2-8-2-1)-0.3lr-80e
+  seed: 42
+  output_dir: /public/home/zhangshikang/project/DATA/models/finetune
+  checkpoint: /public/home/zhangshikang/project/DATA/models/contrastive/pretrain-1-4-5-t-0.1/epoch_9.pth
+  device: cuda
+dataset:
+  __file__: config/data/pannuke.yaml
+  train:
+    __file__: config/data/pannuke.yaml
+    fold: fold3
+  val:
+    __file__: config/data/pannuke.yaml
+    fold: fold1
+  test:
+    __file__: config/data/pannuke.yaml
+    fold: fold2
+transforms:
+  normalize:
+    mean: [0.70478431, 0.57330757, 0.74134993]
+    std: [0.1786614, 0.22592805, 0.19027899]
+  augmentations:
+    - name: elastic
+      p: 0.2
+      alpha: 0.5
+      sigma: 0.25
+    - name: hflip
+      p: 0.5
+    - name: vflip
+      p: 0.5
+    - name: blur
+      p: 0.2
+      kernel_size: 9
+      sigma: [0.2, 1.0]
+    - name: cjitter
+      p: 0.2
+      brightness: 0.25
+      contrast: 0.1
+      saturation: 0.25
+      hue: 0.05
+model:
+  __file__: config/model/weak_finetune.yaml
+  backbone:
+    __file__: config/backbone/r50_4lvl.yaml
+optimizer:
+  epochs: 80
+  weight_decay: 0.0001
+  clip_max_norm: 0.1
+  start_saving_epoch: 0
+  save_per_epoch: 100
+  lr_backbone: 0.000003
+  lr: 0.00003
+  num_warmup_steps: 600
+matcher:
+  __file__: config/base/matcher.yaml
+loss:
+  __file__: config/base/loss.yaml
+loader:
+  train:
+    batch_size: 16
+    num_workers: 1
+    shuffle: True
+    drop_last: True
+  val:
+    batch_size: 16
+    num_workers: 1
+    shuffle: False
+    drop_last: True
+  test:
+    batch_size: 8
+    num_workers: 1
+    shuffle: False
+    drop_last: False

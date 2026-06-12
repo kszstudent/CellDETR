@@ -1,0 +1,7 @@
+class_loss_coef: 2
+bbox_loss_coef: 8
+giou_loss_coef: 2
+dice_loss_coef: 1.0
+focal_alpha: 0.25
+eos_coef: 0.1
+label_loss_coef: 1

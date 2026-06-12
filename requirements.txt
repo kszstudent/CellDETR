@@ -1,0 +1,17 @@
+torch>=1.13.0
+torchvision>=0.15.0
+numpy
+scipy
+pyyaml
+h5py
+pillow
+opencv-python
+scikit-image
+scikit-learn
+pandas
+matplotlib
+tqdm
+wandb
+einops
+timm
+pycocotools

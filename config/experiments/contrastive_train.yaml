@@ -1,0 +1,55 @@
+experiment:
+  wandb: True
+  fintune: False
+  data_type: contrastive
+  project: contrastive_detr
+  name: pretrain-3-7-3-t-0.5-test
+  seed: 42
+  output_dir: /public/home/zhangshikang/project/DATA/models/contrastive
+  checkpoint: None
+  device: cuda
+dataset:
+  __file__: config/data/contrastive.yaml
+transforms:
+  normalize:
+    mean: [0.70478431, 0.57330757, 0.74134993]
+    std: [0.1786614, 0.22592805, 0.19027899]
+  augmentations:
+    - name: blur
+      p: 0.2
+      kernel_size: 9
+      sigma: [0.2, 1.0]
+    - name: hedjitter_
+model:
+  __file__: config/model/contrastive.yaml
+  backbone:
+    __file__: config/backbone/r50_4lvl.yaml
+optimizer:
+  epochs: 3
+  weight_decay: 0.0001
+  clip_max_norm: 0.1
+  start_saving_epoch: 0
+  save_per_epoch: 1
+  lr_backbone: 0.00001
+  lr: 0.0001
+  num_warmup_steps: 5000
+matcher:
+  __file__: config/base/matcher.yaml
+loss:
+  __file__: config/base/loss/contrastive_train.yaml
+loader:
+  train:
+    batch_size: 16
+    num_workers: 3
+    shuffle: True
+    drop_last: True
+  val:
+    batch_size: 16
+    num_workers: 1
+    shuffle: False
+    drop_last: True
+  test:
+    batch_size: 8
+    num_workers: 1
+    shuffle: False
+    drop_last: False

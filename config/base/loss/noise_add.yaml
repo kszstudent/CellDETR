@@ -1,0 +1,15 @@
+# class_loss_coef: 1
+# bbox_loss_coef: 5
+# giou_loss_coef: 2
+# weak_class_coef: 1
+# offset_loss_coef: 0
+# dice_loss_coef: 1.0
+# focal_alpha: 0.25
+# label_loss_coef: 0.2 
+## model1
+class_loss_coef: 0.5
+bbox_loss_coef: 2
+giou_loss_coef: 1
+# dice_loss_coef: 1.0
+focal_alpha: 0.25
+label_loss_coef: 0.05

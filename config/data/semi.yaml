@@ -1,0 +1,6 @@
+name: semi
+root: /public/home/zhangshikang/project/DATA/semi_data/split/train/
+shuffle: True
+tissue: ['lung']
+# tissue: ['lung']
+train_pct: 0.9

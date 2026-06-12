@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+build/
+dist/
+
+# macOS metadata
+.DS_Store
+._*
+
+# IDE
+.vscode/
+.idea/
+
+# Data / checkpoints / logs
+*.h5
+*.pth
+*.pt
+*.ckpt
+wandb/
+runs/
+logs/
+output/
+outputs/
+
+# Jupyter
+.ipynb_checkpoints/
