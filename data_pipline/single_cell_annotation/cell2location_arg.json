@@ -1,0 +1,9 @@
+{
+    "model_input": "st",
+    "model_ref_path":"",
+    "sc_re_file":"",
+    "st_file":"10x_Prostate_st.h5ad",
+    "ref_path":"/t9k/mnt/zsk/workspace/HEST/project/data_process/single_cell_annotation/cell2location_models/c2l_sc_model/prostate/ref.csv",
+    "cut_off":1,
+    "saving_path":"/t9k/mnt/zsk/workspace/HEST/project/data_process/single_cell_annotation/annotation_output/Prostate/cell2location"
+}
